@@ -45,11 +45,9 @@ for question_num in range(len(fequestion)):
 
     # 問題文と回答選択肢を問題ファイルに書く
     quiz_file.write('{}. {}\n'.format(question_num + 1, fequestion[question_num]))
-    logging.debug('{}. {}\n'.format(question_num + 1, fequestion[question_num]))
 
     for i in range(4):
         quiz_file.write(' {}. {}\n'.format('ABCD'[i], answer_option[i]))
-        logging.debug(' {}. {}\n'.format('ABCD'[i], answer_option[i]))
 
     quiz_file.write('\n')
 
