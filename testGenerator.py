@@ -28,20 +28,12 @@ random.shuffle(fequestion)
 
 # リストをループしてそれぞれ問題を作成する
 for question_num in range(len(fequestion)):
-    # 正解と誤答を取得する
-
-    # 正当のindexを取得
-    correct_answer = capitals[fequestion[question_num]]
-    # 辞書の値を全て取得しリスト化
-    wrong_answers = list(capitals.values())
-    # リストから正解を削除
-    del wrong_answers[wrong_answers.index(correct_answer)]
-    # 誤答リストからランダムに3つ取得
-    wrong_answers = random.sample(wrong_answers, 3)
-    # 3つの誤答と正解を選択肢リストとする
-    answer_option = wrong_answers + [correct_answer]
-    # 選択肢リストをシャッフル
-    random.shuffle(answer_option)
+    correct_answer = capitals[fequestion[question_num]]     # 正解を取得
+    wrong_answers = list(capitals.values())                 # 辞書の値を全て取得しリスト化
+    del wrong_answers[wrong_answers.index(correct_answer)]  # リストから正解を削除
+    wrong_answers = random.sample(wrong_answers, 3)         # 誤答リストからランダムに3つ取得
+    answer_option = wrong_answers + [correct_answer]        # 3つの誤答と正解を選択肢リストとする
+    random.shuffle(answer_option)                           # 選択肢リストをシャッフル
 
     # 問題文と回答選択肢を問題ファイルに書く
     quiz_file.write('{}. {}\n'.format(question_num + 1, fequestion[question_num]))
