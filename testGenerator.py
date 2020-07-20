@@ -1,48 +1,84 @@
 # -*- coding: utf-8 -*-
 import random
 
-capitals = {#  '問題':'正解',
-            '関係演算の射影の説明として，適切なものはどれか。':'表の中から指定された属性だけを抜き出して，新しい表を作る。',
-            'キューに関する記述として，最も適切なものはどれか。':'最初に格納されたデータが最初に取り出される。',
-            '負数を2の補数で表すとき，すべてのビットが1であるnビットの2進数"1111…11"が表す数値又はその数式はどれか。':'－1',
-            'DFDの説明はどれか。':'適用業務をデータの流れに注目して視覚的に表現したもの',
-            'USBの特徴はどれか。': '三つのデータ転送モードがあり，ハイスピードモードは外付け磁気ディスクなどの接続に使用される。', 
-            'レーザプリンタの性能を表す指標として，最も適切なものはどれか。': '1インチ(2.54cm)当たりのドット数と1分間に印刷できるページ数', 
-            'システム監査規程の最終的な承認者はだれか。': '経営者', 
-            'IPv4においてIPアドレスからMACアドレスを取得するために用いるプロトコルはどれか。': 'ARP', 
-            'コンパイラにおける最適化の説明として，適切なものはどれか。': 'プログラムコードを解析して，実行時の処理効率を高めたオブジェクトコードを生成する。', 
-            'Javaのアプリケーションプログラムがデータベースにアクセスするための標準的なAPI(Application Program Interface)はどれか。': 'JDBC', 
-            'プロジェクトのリスクに対応する戦略として，損害発生時のリスクに備え，損害賠償保険に加入することにした。PMBOKによれば，該当する戦略はどれか。': '転嫁', 
-            'モジュールテストで使用されるドライバ又はスタブの機能に関する記述のうち，適切なものはどれか。': 'ドライバはテスト対象モジュールに引数を渡して呼び出す。',
-            '当期の建物の減価償却費を計算すると、何千円になるか。ここで建物の取得価格は10,000円, 前期までの減価償却累計額は3,000千円であり、償却法は定額法会計期間は1年間, 太陽年数は20年間とする。':'500',
-            '斜線や曲線に生じるギザギザを目立たなくする技術をなんというか.':'アンチエイリアシング'
-            }
+capitals = {
+        '北海道': '札幌市',
+        '青森県': '青森市',
+        '岩手県': '盛岡市',
+        '宮城県': '仙台市',
+        '秋田県': '秋田市',
+        '山形県': '山形市',
+        '福島県': '福島市',
+        '茨城県': '水戸市',
+        '栃木県': '宇都宮市',
+        '群馬県': '前橋市',
+        '埼玉県': 'さいたま市',
+        '千葉県': '千葉市',
+        '東京都': '東京',
+        '神奈川県': '横浜市',
+        '新潟県': '新潟市',
+        '富山県': '富山市',
+        '石川県': '金沢市',
+        '福井県': '福井市',
+        '山梨県': '甲府市',
+        '長野県': '長野市',
+        '岐阜県': '岐阜市',
+        '静岡県': '静岡市',
+        '愛知県': '名古屋市',
+        '三重県': '津市',
+        '滋賀県': '大津市',
+        '京都府': '京都市',
+        '大阪府': '大阪市',
+        '兵庫県': '神戸市',
+        '奈良県': '奈良市',
+        '和歌山県':'和歌山市',
+        '鳥取県': '鳥取市',
+        '島根県': '松江市',
+        '岡山県': '岡山市',
+        '広島県': '広島市',
+        '山口県': '山口市',
+        '徳島県': '徳島市',
+        '香川県': '松江市',
+        '愛媛県': '松山市',
+        '高知県': '高知市',
+        '福岡県': '福岡市',
+        '佐賀県': '佐賀市',
+        '長崎県': '長崎市',
+        '熊本県': '熊本市',
+        '大分県': '大分市',
+        '宮崎県': '宮崎市',
+        '鹿児島県': '鹿児島市',
+        '沖縄県': '那覇市'
+        }
+# 都道府県の順番をシャッフル
+prefectures = list(capitals.keys())
+random.shuffle(prefectures)
 
-# 問題集と解答集の作成
-quiz_file = open('FEtest.txt', 'w', encoding='utf-8')
-answer_file = open('FEanswer.txt', 'w', encoding='utf-8')
+# 問題と正解の空ファイル
+with open('question.txt', 'w') as f:
+    f.write('')
 
-# 問題の順番をシャッフル
-fequestion = list(capitals.keys())
-random.shuffle(fequestion)
+with open('answer.txt', 'w') as f:
+    f.write('')
 
-# リストをループしてそれぞれ問題を作成する
-for question_num in range(len(fequestion)):
-    correct_answer = capitals[fequestion[question_num]]     # 正解を取得
-    wrong_answers = list(capitals.values())                 # 辞書の値を全て取得しリスト化
+# 47都道府県をループしてそれぞれ問題を作成する
+for question_num in range(len(prefectures)):
+    correct_answer = capitals[prefectures[question_num]]    # 正当のindexを取得
+    wrong_answers = list(capitals.values())             # 辞書の値を全て取得しリスト化
     del wrong_answers[wrong_answers.index(correct_answer)]  # リストから正解を削除
-    wrong_answers = random.sample(wrong_answers, 3)         # 誤答リストからランダムに3つ取得
-    answer_option = wrong_answers + [correct_answer]        # 3つの誤答と正解を選択肢リストとする
-    random.shuffle(answer_option)                           # 選択肢リストをシャッフル
+    wrong_answers = random.sample(wrong_answers, 3)     # 誤答リストからランダムに3つ取得
+    answer_option = wrong_answers + [correct_answer]    # 3つの誤答と正解を選択肢リストとする
+    random.shuffle(answer_option)                   # 選択肢リストをシャッフル
 
     # 問題文と回答選択肢を問題ファイルに書く
-    quiz_file.write('{}. {}\n'.format(question_num + 1, fequestion[question_num]))
+    with open('question.txt', 'a') as f:
+        f.write('{}. {}の都道府県庁所在地は?\n'.format(question_num + 1, prefectures[question_num]))
+        # 選択肢
+        for i in range(4):
+            f.write(' {}. {}\n'.format('ABCD'[i], answer_option[i]))
 
-    for i in range(4):
-        quiz_file.write(' {}. {}\n'.format('ABCD'[i], answer_option[i]))
+        f.write('\n')
 
-    quiz_file.write('\n')
-
-    answer_file.write('{}. {}\n'.format(question_num + 1, 'ABCD'[answer_option.index(correct_answer)]))
-
-quiz_file.close()
+    with open('answer.txt', 'a') as f:
+        # 答えの選択肢をファイルに書く
+        f.write('{}. {}\n'.format(question_num + 1, 'ABCD'[answer_option.index(correct_answer)]))
